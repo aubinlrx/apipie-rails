@@ -150,8 +150,8 @@ module Apipie
       end
 
       module FunctionalTestRecording
-        def process(*args) # action, parameters = nil, session = nil, flash = nil, http_method = 'GET')
-          ret = super(*args)
+        def process(action, **args) # action, method: "GET", params: nil, session: nil, body: nil, flash: {}, format: nil, xhr: false, as: nil
+          ret = super(action, **args)
           if Apipie.configuration.record
             Apipie::Extractor.call_recorder.analyze_functional_test(self)
             Apipie::Extractor.call_finished
